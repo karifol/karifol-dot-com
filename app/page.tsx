@@ -1,27 +1,25 @@
 const products = [
   {
-    name: "プロダクト名",
-    description: "プロダクトの説明文",
-    url: "https://example.com",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18" />
-      </svg>
-    ),
+    name: "じょぶにゃはAI",
+    description: "VRChatのフレンドをAIにしました",
+    url: "https://karifol.com/jobnyaha_ai",
+    icon: <img src="/jobnyaha.jpg" alt="じょぶにゃはAI" className="w-full h-full object-cover" />,
   },
 ];
 
+import { ThemeToggle } from "./theme-toggle";
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center px-6 pt-64 pb-20">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 flex flex-col items-center px-6 pt-64 pb-20">
+      <ThemeToggle />
       {/* プロフィールアイコン */}
-      <div className="w-24 h-24 rounded-full border border-zinc-200 overflow-hidden">
+      <div className="w-24 h-24 rounded-full border border-zinc-200 dark:border-zinc-700 overflow-hidden">
         <img src="/karifol.png" alt="karifol" className="w-full h-full object-cover" />
       </div>
 
       {/* タイトル */}
-      <h1 className="mt-5 text-xl font-medium text-zinc-800 tracking-wide">
+      <h1 className="mt-5 text-xl font-medium text-zinc-800 dark:text-zinc-100 tracking-wide">
         karifolの個人ウェブサイト
       </h1>
 
@@ -33,21 +31,21 @@ export default function Home() {
               href={product.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 px-5 py-4 rounded-2xl border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-colors group"
+              className="flex items-center gap-4 px-5 py-4 rounded-2xl border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors group"
             >
-              <div className="w-10 h-10 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-500 shrink-0 group-hover:bg-zinc-200 transition-colors">
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0">
                 {product.icon}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-zinc-800">{product.name}</p>
-                <p className="text-xs text-zinc-400 mt-0.5 truncate">{product.description}</p>
+                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{product.name}</p>
+                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5 truncate">{product.description}</p>
               </div>
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth={1.5}
-                className="w-4 h-4 text-zinc-300 group-hover:text-zinc-400 shrink-0 transition-colors"
+                className="w-4 h-4 text-zinc-300 dark:text-zinc-600 group-hover:text-zinc-400 dark:group-hover:text-zinc-400 shrink-0 transition-colors"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
               </svg>
