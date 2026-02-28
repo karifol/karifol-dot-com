@@ -1,18 +1,15 @@
 const products = [
   {
-    name: "じょぶにゃはAI",
+    name: "じょぶにゃは  えーあい",
     description: "VRChatのフレンドをAIにしました",
-    url: "https://karifol.com/jobnyaha_ai",
-    icon: <img src="/jobnyaha.jpg" alt="じょぶにゃはAI" className="w-full h-full object-cover" />,
+    url: "/jobnyaha_ai",
+    icon: <img src="/jobnyaha.jpg" alt="じょぶにゃはあい" className="w-full h-full object-cover" />,
   },
 ];
-
-import { ThemeToggle } from "./theme-toggle";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950 flex flex-col items-center px-6 pt-64 pb-20">
-      <ThemeToggle />
       {/* プロフィールアイコン */}
       <div className="w-24 h-24 rounded-full border border-zinc-200 dark:border-zinc-700 overflow-hidden">
         <img src="/karifol.png" alt="karifol" className="w-full h-full object-cover" />
@@ -29,9 +26,7 @@ export default function Home() {
           <li key={product.name}>
             <a
               href={product.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 px-5 py-4 rounded-2xl border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors group"
+className="flex items-center gap-4 px-5 py-4 rounded-2xl border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors group"
             >
               <div className="w-10 h-10 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0">
                 {product.icon}
