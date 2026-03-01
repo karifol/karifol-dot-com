@@ -177,7 +177,6 @@ export default function JobnyahaAITrain() {
             </div>
           </div>
           
-
           {/* 学習率パネル */}
           <div className="bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-2xl p-4 mb-3">
             {/* ヘッダー */}
