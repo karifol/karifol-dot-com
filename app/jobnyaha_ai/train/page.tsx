@@ -176,6 +176,7 @@ export default function JobnyahaAITrain() {
               <p className="text-xs text-zinc-500">AIに口癖・性格・エピソードを教えます</p>
             </div>
           </div>
+          
 
           {/* 学習率パネル */}
           <div className="bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-2xl p-4 mb-3">
