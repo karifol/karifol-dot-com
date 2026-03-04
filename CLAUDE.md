@@ -65,4 +65,36 @@ data: {"type": "done"}
 ```
 STREAMING_API_URL=...   # じょぶにゃはAI バックエンドURL (サーバーサイドのみ)
 STREAMING_API_KEY=...   # APIキー (サーバーサイドのみ)
+TRAIN_API_URL=...       # 育てるAPI バックエンドURL (サーバーサイドのみ)
+TRAIN_API_KEY=...       # APIキー (サーバーサイドのみ)
+```
+
+## Amplify デプロイ
+
+**プラットフォーム**: WEB_COMPUTE (Next.js - SSR)
+
+**環境変数の注意点**: Amplify WEB_COMPUTE では、サーバーサイドの環境変数（`NEXT_PUBLIC_` なし）はビルド前に `.env` ファイルへ書き出さないと Lambda に反映されない。Amplifyコンソール → Hosting → ビルドの設定 で以下を設定する：
+
+```yaml
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci --cache .npm --prefer-offline
+    build:
+      commands:
+        - echo "STREAMING_API_URL=$STREAMING_API_URL" >> .env
+        - echo "STREAMING_API_KEY=$STREAMING_API_KEY" >> .env
+        - echo "TRAIN_API_URL=$TRAIN_API_URL" >> .env
+        - echo "TRAIN_API_KEY=$TRAIN_API_KEY" >> .env
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - .npm/**/*
 ```

@@ -1,20 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
-export default function JobnyahaAITop() {
+export default function JobnyahaAITestTop() {
   const [hovered, setHovered] = useState<"chat" | "train" | null>(null);
-  const [learningRate, setLearningRate] = useState<number | null>(null);
-
-  useEffect(() => {
-    fetch("/api/train/stats")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data?.overall != null) setLearningRate(data.overall);
-      })
-      .catch(() => {});
-  }, []);
 
   // 斜めの角度を強めに: 左上70% → 左下20% のライン
   // ホバー時にそのラインが左右にずれる
@@ -122,11 +112,6 @@ export default function JobnyahaAITop() {
             </div>
             <h2 className="text-3xl font-light tracking-[0.15em] text-white/90">育てる</h2>
             <p className="text-sm text-white/40 tracking-wider">AIにじょぶにゃはを教える</p>
-            {learningRate != null && (
-              <p className="text-xs text-white/30 tracking-wider mt-1">
-                学習率 <span className="text-white/50">{learningRate}%</span>
-              </p>
-            )}
           </div>
         </div>
       </Link>
@@ -134,6 +119,9 @@ export default function JobnyahaAITop() {
       {/* ===== 中央タイトル ===== */}
       <div className="absolute inset-0 z-30 pointer-events-none flex items-start justify-center pt-12">
         <div className="flex flex-col items-center gap-3">
+          <div className="w-20 h-20 rounded-full overflow-hidden ring-2 ring-white/20 shadow-2xl">
+            <img src="/jobnyaha.jpg" alt="じょぶにゃは えーあい" className="w-full h-full object-cover" />
+          </div>
           <h1 className="text-3xl font-light tracking-[0.2em] text-white/90 drop-shadow-lg flex items-baseline gap-2">
             じょぶにゃは<span className="text-sm tracking-[0.3em] text-white/30 uppercase">AI</span>
           </h1>
