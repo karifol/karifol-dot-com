@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "じょぶにゃは AI",
-  description: "じょぶにゃは AI — かつてのフレンドを取り戻すための AI",
+  description: "かつてのフレンドを取り戻すプロジェクト（嘘）",
   openGraph: {
     title: "じょぶにゃは AI",
-    description: "じょぶにゃは AI — かつてのフレンドを取り戻すための AI",
+    description: "かつてのフレンドを取り戻すプロジェクト（嘘）",
     siteName: "karifol.com",
     images: [
       {
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "じょぶにゃは AI",
-    description: "じょぶにゃは AI — かつてのフレンドを取り戻すための AI",
+    description: "かつてのフレンドを取り戻すプロジェクト（嘘）",
     images: ["https://karifol.com/jobnyaha-logo.png"],
   },
 };
