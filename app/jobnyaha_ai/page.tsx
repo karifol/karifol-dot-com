@@ -1,11 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
+
+const prologueText =
+  "どんな時も一緒にいたフレンドがいた。\n" +
+  "名前は「じょぶにゃは」。\n" +
+  "今はどこかに消えてしまった。\n\n" +
+  "彼への気持ちはいまだにぬぐい切れない——\n" +
+  "これはそんなあなたのためのプロジェクト。\n" +
+  "かつてのじょぶにゃはをAIで再現しよう。\n" +
+  "すべてはこれから、あなたが教えてくれる。\n\n" +
+  "さあ あなたとじょぶにゃはの思い出を教えて。";
+
+const CHAR_INTERVAL = 50; // 1文字あたりのms
+const NEWLINE_PAUSE = 300; // 改行時の追加待機ms
 
 export default function JobnyahaAITop() {
   const [hovered, setHovered] = useState<"chat" | "train" | null>(null);
   const [learningRate, setLearningRate] = useState<number | null>(null);
+  const [showPrologue, setShowPrologue] = useState(true);
+  const [displayedLen, setDisplayedLen] = useState(0);
+  const [prologueFading, setPrologueFading] = useState(false);
+  const streamingDone = displayedLen >= prologueText.length;
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     fetch("/api/train/stats")
@@ -16,8 +34,33 @@ export default function JobnyahaAITop() {
       .catch(() => {});
   }, []);
 
-  // 斜めの角度を強めに: 左上70% → 左下20% のライン
-  // ホバー時にそのラインが左右にずれる
+  // 1文字ずつストリーミング表示
+  useEffect(() => {
+    if (!showPrologue || streamingDone) return;
+
+    const nextChar = prologueText[displayedLen];
+    const delay = nextChar === "\n" ? NEWLINE_PAUSE : CHAR_INTERVAL;
+
+    timerRef.current = setTimeout(() => {
+      setDisplayedLen((v) => v + 1);
+    }, delay);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [showPrologue, displayedLen, streamingDone]);
+
+  const dismissPrologue = useCallback(() => {
+    setPrologueFading(true);
+    setTimeout(() => setShowPrologue(false), 800);
+  }, []);
+
+  // 全文表示後、少し待ってから自動でフェードアウト
+  useEffect(() => {
+    if (!streamingDone) return;
+    const timer = setTimeout(dismissPrologue, 3000);
+    return () => clearTimeout(timer);
+  }, [streamingDone, dismissPrologue]);
+
   const chatClip =
     hovered === "train"
       ? "polygon(0 0, 58% 0, 8% 100%, 0 100%)"
@@ -34,6 +77,41 @@ export default function JobnyahaAITop() {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden select-none">
+      {/* ===== プロローグオーバーレイ ===== */}
+      {showPrologue && (
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center cursor-pointer"
+          style={{
+            background: "linear-gradient(135deg, rgba(10,10,15,0.75) 0%, rgba(26,16,37,0.7) 50%, rgba(15,10,26,0.75) 100%)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+            opacity: prologueFading ? 0 : 1,
+            transition: "opacity 0.8s ease-out",
+          }}
+          onClick={dismissPrologue}
+        >
+          <div className="max-w-2xl px-8 text-center">
+            {prologueText.slice(0, displayedLen).split("\n").map((line, i) => (
+              <p
+                key={i}
+                className="text-white/80 text-lg font-light leading-relaxed tracking-wider"
+                style={{ minHeight: line === "" ? "0.8em" : undefined }}
+              >
+                {line}
+              </p>
+            ))}
+            {!streamingDone && (
+              <span className="inline-block w-[2px] h-[1.1em] bg-white/50 animate-pulse align-middle ml-0.5" />
+            )}
+            {streamingDone && (
+              <p className="mt-10 text-white/20 text-xs tracking-[0.3em] uppercase animate-pulse">
+                click to continue
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* ===== 左側: 会話する ===== */}
       <Link
         href="/jobnyaha_ai/chat"
