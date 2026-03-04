@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "じょぶにゃは AI",
-  description: "じょぶにゃは えーあい — 会話したり育てたりできるAI",
+  description: "じょぶにゃは AI — かつてのフレンドを取り戻すための AI",
   openGraph: {
     title: "じょぶにゃは AI",
-    description: "じょぶにゃは えーあい — 会話したり育てたりできるAI",
-    url: "https://karifol.com/jobnyaha_ai",
+    description: "じょぶにゃは AI — かつてのフレンドを取り戻すための AI",
     siteName: "karifol.com",
     images: [
       {
-        url: "https://karifol.com/jobnyaha.jpg",
+        url: "https://karifol.com/jobnyaha-logo.png",
         width: 1200,
         height: 630,
       },
@@ -20,8 +19,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "じょぶにゃは AI",
-    description: "じょぶにゃは えーあい — 会話したり育てたりできるAI",
-    images: ["https://karifol.com/jobnyaha.jpg"],
+    description: "じょぶにゃは AI — かつてのフレンドを取り戻すための AI",
+    images: ["https://karifol.com/jobnyaha-logo.png"],
   },
 };
 
