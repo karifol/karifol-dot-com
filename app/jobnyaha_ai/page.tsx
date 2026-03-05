@@ -4,14 +4,14 @@ import { useEffect, useState, useCallback, useRef, useSyncExternalStore } from "
 import Link from "next/link";
 
 const prologueText =
-  "どんな時も一緒にいたフレンドがいた。\n" +
-  "名前は「じょぶにゃは」。\n" +
-  "今はどこかに消えてしまった。\n\n" +
-  "彼への気持ちはいまだにぬぐい切れない——\n" +
-  "これはそんなあなたのためのプロジェクト。\n" +
-  "かつてのじょぶにゃはをAIで再現しよう。\n" +
-  "すべてはこれから、あなたが教えてくれる。\n\n" +
-  "さあ あなたとじょぶにゃはの思い出を教えて。";
+  "昔、ジョブニャハという友達がいました。\n" +
+  "笑い方も、口癖も、どうでもいい会話も、まだ覚えています。\n\n" +
+  "しかし、ある日を境に、彼はどこかへ行ってしまいました。\n" +
+  "どこへ行ったのか、誰も知りません。\n\n" +
+  "もし、みんなの記憶を集めることができたなら。\n" +
+  "もし、その言葉や思い出をAIに覚えさせることができたなら ...\n\n" +
+  "ここはジョブニャハの記憶を集める場所です。\n" +
+  "あなたの思い出をここに残してください。";
 
 const CHAR_INTERVAL = 50; // 1文字あたりのms
 const NEWLINE_PAUSE = 300; // 改行時の追加待機ms
@@ -66,7 +66,7 @@ export default function JobnyahaAITop() {
   // 全文表示後、少し待ってから自動でフェードアウト
   useEffect(() => {
     if (!streamingDone) return;
-    const timer = setTimeout(dismissPrologue, 3000);
+    const timer = setTimeout(dismissPrologue, 5000);
     return () => clearTimeout(timer);
   }, [streamingDone, dismissPrologue]);
 
