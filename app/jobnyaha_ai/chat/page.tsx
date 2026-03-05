@@ -321,14 +321,14 @@ export default function JobnyahaAIChat() {
                             </div>
                           </div>
                           {teachOpenId === msg.id && (
-                            <div className="flex flex-col gap-1 mt-2">
+                            <div className="flex flex-col gap-1 mt-2 min-w-[280px] sm:min-w-[400px]">
                               <div className="flex gap-2 items-center">
                                 <input
                                   type="text"
                                   value={teachInputs[msg.id] ?? ""}
                                   onChange={(e) => setTeachInputs((prev) => ({ ...prev, [msg.id]: e.target.value.slice(0, 100) }))}
                                   placeholder="じょぶにゃはは〇〇が好き、など"
-                                  className="rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 text-sm text-white/80 outline-none placeholder-white/20 w-full max-w-72"
+                                  className="rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 text-sm text-white/80 outline-none placeholder-white/20 w-full"
                                 />
                                 {(teachInputs[msg.id]?.length ?? 0) > 0 && (
                                   <span className={`text-xs shrink-0 ${(teachInputs[msg.id]?.length ?? 0) >= 100 ? "text-red-400" : "text-white/30"}`}>
