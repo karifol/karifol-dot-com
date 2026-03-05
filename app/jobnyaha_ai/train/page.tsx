@@ -6,16 +6,17 @@ import { SiteHeader } from "../../site-header";
 import { loadTrainData, saveTrainData } from "../../lib/train-storage";
 import { getUserId } from "../../lib/user-id";
 
-const PRONOUNS = ["ぼく", "わたし", "うち", "おれ", "あたし"];
+const PRONOUNS = ["ぼく", "わたし", "うち", "おれ", "あたし", "にゃは"];
 
 const CATCHPHRASE_TAGS = [
-  "にゃは！", "〜だよ〜", "〜だにゃ", "えへ", "〜かも",
-  "うーん", "やったー", "えっと", "ふわ〜", "〜ねえ",
+  "〜だよ〜", "〜だにゃ", "えへ", "〜かも",
+  "うーん", "やったー", "えっと", "ふわ〜", "〜ねえ", "にゃは", "むふ",
+  "朕は、日本国民の総意に基いて、新日本建設..."
 ];
 
 const ENDING_TAGS = [
   "〜にゃ", "〜だよ〜", "〜ね", "〜かな", "〜ー",
-  "〜！", "笑", "w", "〜♪", "〜だよ",
+  "〜！", "笑", "w", "〜♪", "〜だよ", "～にゃは",
 ];
 
 const NATURE_TRAITS = [
