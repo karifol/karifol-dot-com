@@ -19,7 +19,11 @@ const NEWLINE_PAUSE = 300; // 改行時の追加待機ms
 export default function JobnyahaAITop() {
   const [hovered, setHovered] = useState<"chat" | "train" | null>(null);
   const [learningRate, setLearningRate] = useState<number | null>(null);
-  const [showPrologue, setShowPrologue] = useState(true);
+  const [showPrologue, setShowPrologue] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const today = new Date().toISOString().slice(0, 10);
+    return localStorage.getItem("jobnyaha_prologue_seen") !== today;
+  });
   const [displayedLen, setDisplayedLen] = useState(0);
   const [prologueFading, setPrologueFading] = useState(false);
   const streamingDone = displayedLen >= prologueText.length;
@@ -59,8 +63,16 @@ export default function JobnyahaAITop() {
   }, [showPrologue, displayedLen, streamingDone]);
 
   const dismissPrologue = useCallback(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    localStorage.setItem("jobnyaha_prologue_seen", today);
     setPrologueFading(true);
     setTimeout(() => setShowPrologue(false), 800);
+  }, []);
+
+  const replayPrologue = useCallback(() => {
+    setDisplayedLen(0);
+    setPrologueFading(false);
+    setShowPrologue(true);
   }, []);
 
   // 全文表示後、少し待ってから自動でフェードアウト
@@ -239,6 +251,14 @@ export default function JobnyahaAITop() {
           <h1 className="text-3xl font-light tracking-[0.2em] text-white/90 drop-shadow-lg flex items-baseline gap-2">
             じょぶにゃは<span className="text-sm tracking-[0.3em] text-white/30 uppercase">AI</span>
           </h1>
+          {!showPrologue && (
+            <button
+              className="pointer-events-auto text-xs text-white/20 hover:text-white/40 tracking-[0.2em] transition-colors"
+              onClick={replayPrologue}
+            >
+              プロローグ
+            </button>
+          )}
         </div>
       </div>
     </div>
