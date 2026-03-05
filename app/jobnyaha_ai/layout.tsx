@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "じょぶにゃは AI",
     description: "かつてのフレンドを取り戻すプロジェクト（嘘）",
-    images: ["https://karifol.com/jobnyaha-logo.png"],
+    images: ["https://karifol.com/jobnyaha-x.png"],
   },
 };
 
