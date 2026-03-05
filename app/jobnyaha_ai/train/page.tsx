@@ -29,11 +29,11 @@ const NATURE_TRAITS = [
 type Step = 0 | 1 | 2 | 3 | 4 | 5;
 
 const questions: { text: string; sub?: string }[] = [
-  { text: "じょぶにゃはの一人称は\nなんて呼ぶ？" },
-  { text: "じょぶにゃはの口癖を\n教えて", sub: "いくつでも選んでね" },
-  { text: "語尾はどんな感じ？", sub: "いくつでも選んでね" },
-  { text: "じょぶにゃはの性格は\nどんな感じ？", sub: "それぞれ5段階で教えてね" },
-  { text: "じょぶにゃはとの\nエピソードを教えて", sub: "思い出や出会いを自由に書いてね" },
+  { text: "じょぶにゃはの一人称は？" },
+  { text: "じょぶにゃはの口癖を教えて", sub: "いくつでも選んでね" },
+  { text: "じょぶにゃはの語尾はどんな感じ？", sub: "いくつでも選んでね" },
+  { text: "じょぶにゃはの性格はどんな感じ？", sub: "それぞれ5段階で教えてね" },
+  { text: "じょぶにゃはとのエピソードを教えて", sub: "思い出や出会いを自由に書いてね" },
 ];
 
 function useTypewriter(text: string, speed = 60, active = true) {
