@@ -328,7 +328,7 @@ export default function JobnyahaAIChat() {
                                   value={teachInputs[msg.id] ?? ""}
                                   onChange={(e) => setTeachInputs((prev) => ({ ...prev, [msg.id]: e.target.value.slice(0, 100) }))}
                                   placeholder="じょぶにゃはは〇〇が好き、など"
-                                  className="rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 text-sm text-white/80 outline-none placeholder-white/20 w-72"
+                                  className="rounded-full border border-white/20 bg-white/5 backdrop-blur-sm px-4 py-1.5 text-sm text-white/80 outline-none placeholder-white/20 w-full max-w-72"
                                 />
                                 {(teachInputs[msg.id]?.length ?? 0) > 0 && (
                                   <span className={`text-xs shrink-0 ${(teachInputs[msg.id]?.length ?? 0) >= 100 ? "text-red-400" : "text-white/30"}`}>
@@ -395,7 +395,7 @@ export default function JobnyahaAIChat() {
                   </svg>
                 </button>
               </form>
-              <p className="mt-3 text-center text-xs text-white/50 whitespace-nowrap">
+              <p className="mt-3 text-center text-xs text-white/50">
                 AIの回答は不確実な場合があり、じょぶにゃは本人の思想や意図と異なります。ジョークです。
               </p>
               <a
@@ -412,7 +412,7 @@ export default function JobnyahaAIChat() {
             <SiteHeader />
             <div className="flex flex-1 flex-col items-center justify-center px-6">
               <div className="flex w-full max-w-3xl flex-col items-center">
-                <h1 className="mb-2 text-4xl font-light tracking-[0.2em] text-white/90 flex items-baseline gap-3">
+                <h1 className="mb-2 text-2xl sm:text-4xl font-light tracking-[0.2em] text-white/90 flex items-baseline gap-3">
                   じょぶにゃは<span className="text-4xls tracking-[0.3em] text-white/30 uppercase">AI</span>
                 </h1>
                 <p className="mb-10 text-sm text-white/30 tracking-widest"></p>
@@ -456,7 +456,7 @@ export default function JobnyahaAIChat() {
                     </button>
                   ))}
                 </div>
-                <p className="mt-6 text-center  text-white/50 whitespace-nowrap">
+                <p className="mt-6 text-center text-xs sm:text-sm text-white/50">
                   AIの回答は不確実な場合があり、じょぶにゃは本人の思想や意図と異なります。ジョークです。
                 </p>
               </div>

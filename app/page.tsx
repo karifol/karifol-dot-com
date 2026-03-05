@@ -9,7 +9,7 @@ const products = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950 flex flex-col items-center px-6 pt-64 pb-20">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 flex flex-col items-center px-6 pt-32 sm:pt-64 pb-20">
       {/* プロフィールアイコン */}
       <div className="w-24 h-24 rounded-full border border-zinc-200 dark:border-zinc-700 overflow-hidden">
         <img src="/karifol.png" alt="karifol" className="w-full h-full object-cover" />
