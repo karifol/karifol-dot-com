@@ -65,31 +65,16 @@ function useTypewriter(text: string, speed = 60, active = true) {
 
 export default function TrainPage() {
   const [step, setStep] = useState<Step>(0);
-  const [pronoun, setPronoun] = useState<string | null>(null);
-  const [catchphrases, setCatchphrases] = useState<string[]>([]);
-  const [endings, setEndings] = useState<string[]>([]);
-  const [nature, setNature] = useState<Record<string, number>>(
-    Object.fromEntries(NATURE_TRAITS.map((t) => [t.key, 3])),
-  );
-  const [episodeText, setEpisodeText] = useState("");
+  const [pronoun, setPronoun] = useState<string | null>(() => loadTrainData().words?.pronoun ?? null);
+  const [catchphrases, setCatchphrases] = useState<string[]>(() => loadTrainData().words?.catchphrases ?? []);
+  const [endings, setEndings] = useState<string[]>(() => loadTrainData().words?.endings ?? []);
+  const [nature, setNature] = useState<Record<string, number>>(() => {
+    const defaults = Object.fromEntries(NATURE_TRAITS.map((t) => [t.key, 3]));
+    return { ...defaults, ...loadTrainData().personality };
+  });
+  const [episodeText, setEpisodeText] = useState(() => loadTrainData().episode?.text ?? "");
   const [choicesDelay, setChoicesDelay] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
-
-  // ローカルストレージから初期値を読み込む
-  useEffect(() => {
-    const saved = loadTrainData();
-    if (saved.words) {
-      if (saved.words.pronoun) setPronoun(saved.words.pronoun);
-      if (saved.words.catchphrases) setCatchphrases(saved.words.catchphrases);
-      if (saved.words.endings) setEndings(saved.words.endings);
-    }
-    if (saved.personality) {
-      setNature((prev) => ({ ...prev, ...saved.personality }));
-    }
-    if (saved.episode?.text) {
-      setEpisodeText(saved.episode.text);
-    }
-  }, []);
 
   const currentQuestion = step < 5 ? questions[step] : null;
   const { displayed, done: typeDone } = useTypewriter(
@@ -104,7 +89,7 @@ export default function TrainPage() {
     if (typeDone && step < 5) {
       choicesTimer.current = setTimeout(() => setChoicesDelay(true), 200);
     } else {
-      setChoicesDelay(false);
+      choicesTimer.current = setTimeout(() => setChoicesDelay(false), 0);
     }
     return () => {
       if (choicesTimer.current) clearTimeout(choicesTimer.current);
@@ -210,34 +195,28 @@ export default function TrainPage() {
 
   const TOTAL_QUESTION_STEPS = 5;
 
-  const BackButton = ({ onClick }: { onClick: () => void }) => (
-    <button
-      onClick={onClick}
-      className="mt-3 px-4 py-2 -mx-4 -my-2 flex items-center gap-1.5 text-white/30 hover:text-white/60 transition-colors duration-300 cursor-pointer"
-    >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-      </svg>
-      <span className="text-xs tracking-wider">もどる</span>
-    </button>
-  );
-
-  const NextButton = ({ onClick }: { onClick: () => void }) => (
-    <button
-      onClick={onClick}
-      className="mt-3 px-4 py-2 -mx-4 -my-2 flex items-center gap-1.5 text-white/30 hover:text-white/60 transition-colors duration-300 cursor-pointer"
-    >
-      <span className="text-xs tracking-wider">つぎへ</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-      </svg>
-    </button>
-  );
-
-  const NavButtons = () => (
+  const navButtons = (
     <div className={`mt-3 flex w-full ${step > 0 ? "justify-between" : "justify-end"}`}>
-      {step > 0 && <BackButton onClick={goBack} />}
-      <NextButton onClick={goNext} />
+      {step > 0 && (
+        <button
+          onClick={goBack}
+          className="mt-3 px-4 py-2 -mx-4 -my-2 flex items-center gap-1.5 text-white/30 hover:text-white/60 transition-colors duration-300 cursor-pointer"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+          <span className="text-xs tracking-wider">もどる</span>
+        </button>
+      )}
+      <button
+        onClick={goNext}
+        className="mt-3 px-4 py-2 -mx-4 -my-2 flex items-center gap-1.5 text-white/30 hover:text-white/60 transition-colors duration-300 cursor-pointer"
+      >
+        <span className="text-xs tracking-wider">つぎへ</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      </button>
     </div>
   );
 
@@ -388,7 +367,7 @@ export default function TrainPage() {
                           </button>
                         ))}
                       </div>
-                      <NavButtons />
+                      {navButtons}
                     </div>
                   </div>
 
@@ -410,7 +389,7 @@ export default function TrainPage() {
                           </button>
                         ))}
                       </div>
-                      <NavButtons />
+                      {navButtons}
                     </div>
                   </div>
 
@@ -444,7 +423,7 @@ export default function TrainPage() {
                           </div>
                         ))}
                       </div>
-                      <NavButtons />
+                      {navButtons}
                     </div>
                   </div>
 
@@ -467,7 +446,7 @@ export default function TrainPage() {
                       >
                         {episodeText.length} / 300
                       </p>
-                      <NavButtons />
+                      {navButtons}
                     </div>
                   </div>
                 </div>
