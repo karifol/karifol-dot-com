@@ -150,7 +150,13 @@ export default function JobnyahaAITop() {
         <div className="absolute inset-0 bg-gradient-to-br from-rose-400/40 to-amber-300/30" />
 
         {/* コンテンツ - 左寄りに配置 */}
-        <div className="relative z-10 flex h-full items-center justify-center sm:justify-start" style={{ paddingLeft: isMobile ? undefined : "15%" }}>
+        <div
+          className="relative z-10 flex items-center justify-center sm:justify-start"
+          style={{
+            height: isMobile ? "50vh" : "100%",
+            paddingLeft: isMobile ? undefined : "15%",
+          }}
+        >
           <div
             className="flex flex-col items-center gap-4 transition-all duration-500"
             style={{
@@ -196,7 +202,14 @@ export default function JobnyahaAITop() {
         <div className="absolute inset-0 bg-gradient-to-bl from-sky-300/35 to-violet-400/30" />
 
         {/* コンテンツ - 右寄りに配置 */}
-        <div className="relative z-10 flex h-full items-center justify-center sm:justify-end" style={{ paddingRight: isMobile ? undefined : "15%" }}>
+        <div
+          className="relative z-10 flex items-center justify-center sm:justify-end"
+          style={{
+            height: isMobile ? "50vh" : "100%",
+            marginTop: isMobile ? "50vh" : undefined,
+            paddingRight: isMobile ? undefined : "15%",
+          }}
+        >
           <div
             className="flex flex-col items-center gap-4 transition-all duration-500"
             style={{
