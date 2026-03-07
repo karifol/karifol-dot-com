@@ -3,7 +3,6 @@ const products = [
     name: "じょぶにゃは  えーあい",
     description: "VRChatのフレンドをAIにしました",
     url: "/jobnyaha_ai",
-    icon: <img src="/jobnyaha.jpg" alt="じょぶにゃはあい" className="w-full h-full object-cover" />,
     bg: "/jobnyaha-overlay.jpg",
   },
 ];

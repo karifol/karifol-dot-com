@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FadeIn } from "../fade-in";
-import { SiteHeader } from "../../site-header";
 import { loadTrainData, saveTrainData } from "../../lib/train-storage";
 import { getUserId } from "../../lib/user-id";
 
@@ -223,11 +222,6 @@ export default function TrainPage() {
 
   return (
     <div className="relative min-h-screen w-screen overflow-hidden">
-      {/* ヘッダー */}
-      <div className="absolute top-0 left-0 z-40 pointer-events-auto">
-        <SiteHeader />
-      </div>
-
       {/* 背景 */}
       <div
         className="absolute inset-0 scale-110"

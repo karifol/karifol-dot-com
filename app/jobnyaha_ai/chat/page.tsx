@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
-import { SiteHeader } from "../../site-header";
 import { FadeIn } from "../fade-in";
 import { getUserId } from "../../lib/user-id";
 
@@ -216,8 +215,6 @@ export default function JobnyahaAIChat() {
       <FadeIn className="flex-1 min-h-0 flex flex-col">
       {hasMessages ? (
           <div className="relative z-10 flex flex-col flex-1 min-h-0">
-            <SiteHeader />
-
             {/* メッセージ一覧 */}
             <main ref={messagesRef} className="flex-1 overflow-y-auto px-6 py-6">
               <div className="mx-auto flex max-w-3xl flex-col gap-6">
@@ -409,7 +406,6 @@ export default function JobnyahaAIChat() {
         ) : (
           /* 初期画面 */
           <div className="relative z-10 flex flex-col flex-1 min-h-0">
-            <SiteHeader />
             <div className="flex flex-1 flex-col items-center justify-center px-6">
               <div className="flex w-full max-w-3xl flex-col items-center">
                 <h1 className="mb-2 text-2xl sm:text-4xl font-light tracking-[0.2em] text-white/90 flex items-baseline gap-3">
