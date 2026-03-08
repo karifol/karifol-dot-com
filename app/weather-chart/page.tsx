@@ -9,7 +9,7 @@ const BASE = "https://weather-models.info/latest/images/ecmwf_ens_details/12Z/ms
 const CHART_TYPES = [
   { label: "500hPa Height", slug: "500z-mean-spread" },
   { label: "Surface Pressure", slug: "mslp-mean-spread" },
-] as const;
+];
 
 export default function WeatherChartPage() {
   const printAreaRef = useRef<HTMLDivElement>(null);
