@@ -3,19 +3,31 @@
 import { useRef, useState } from "react";
 import { ThemeToggle } from "../theme-toggle";
 
-const HOURS = [60, 84, 108, 132, 156, 180];
+const FT_RANGES = [
+  { label: "FT60–180", hours: [60, 84, 108, 132, 156, 180] },
+  { label: "FT72–192", hours: [72, 96, 120, 144, 168, 192] },
+];
 const BASE = "https://weather-models.info/latest/images/ecmwf_ens_details/12Z/msm-japan-";
 
 const CHART_TYPES = [
   { label: "500hPa Height", slug: "500z-mean-spread" },
   { label: "Surface Pressure", slug: "mslp-mean-spread" },
+  { label: "850hPa Temp + 500hPa Height", slug: "850t-500z-mean" },
+  { label: "850hPa Temperature", slug: "850t-mean-spread" },
+  { label: "Gust Prob 25kt", slug: "gprob25" },
+  { label: "Precip Prob 1mm", slug: "pprob1" },
+  { label: "Precip Prob 5mm", slug: "pprob5" },
+  { label: "Precip Prob 10mm", slug: "pprob10" },
+  { label: "Precip Prob 20mm", slug: "pprob20" },
+  { label: "Precip Prob 100mm", slug: "pprob100" },
 ];
 
 export default function WeatherChartPage() {
   const printAreaRef = useRef<HTMLDivElement>(null);
   const [chartType, setChartType] = useState(CHART_TYPES[0].slug);
+  const [ftRange, setFtRange] = useState(0);
 
-  const images = HOURS.map((h) => `${BASE}${chartType}-${h}.png`);
+  const images = FT_RANGES[ftRange].hours.map((h) => `${BASE}${chartType}-${h}.png`);
 
   const handlePrint = () => {
     window.print();
@@ -79,6 +91,17 @@ export default function WeatherChartPage() {
               {CHART_TYPES.map((ct) => (
                 <option key={ct.slug} value={ct.slug}>
                   {ct.label}
+                </option>
+              ))}
+            </select>
+            <select
+              value={ftRange}
+              onChange={(e) => setFtRange(Number(e.target.value))}
+              className="px-3 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-600 rounded-lg text-sm text-zinc-800 dark:text-zinc-100"
+            >
+              {FT_RANGES.map((ft, i) => (
+                <option key={ft.label} value={i}>
+                  {ft.label}
                 </option>
               ))}
             </select>
