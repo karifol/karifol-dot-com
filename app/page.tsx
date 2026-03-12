@@ -5,7 +5,6 @@ const products = [
     name: "じょぶにゃは えーあい",
     description: "VRChatのフレンドをAIにしました",
     url: "/jobnyaha_ai",
-    icon: "/jobnyaha.jpg",
     tag: "AI",
   },
 ];
@@ -40,11 +39,6 @@ export default function Home() {
                 href={product.url}
                 className="flex items-center gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors duration-150"
               >
-                {/* Icon */}
-                <div className="w-10 h-10 rounded-lg overflow-hidden shrink-0 ring-1 ring-black/5 dark:ring-white/10">
-                  <img src={product.icon} alt={product.name} className="w-full h-full object-cover" />
-                </div>
-
                 {/* Text */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
