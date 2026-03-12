@@ -6,7 +6,6 @@ const products = [
     description: "VRChatのフレンドをAIにしました",
     url: "/jobnyaha_ai",
     bg: "/jobnyaha-overlay.jpg",
-    tag: "AI",
   },
 ];
 
@@ -54,12 +53,7 @@ export default function Home() {
 
                 {/* Text */}
                 <div className="relative flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{product.name}</p>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 leading-none">
-                      {product.tag}
-                    </span>
-                  </div>
+                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{product.name}</p>
                   <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5 truncate">{product.description}</p>
                 </div>
 
