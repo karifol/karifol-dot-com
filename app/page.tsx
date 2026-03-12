@@ -5,6 +5,7 @@ const products = [
     name: "じょぶにゃは えーあい",
     description: "VRChatのフレンドをAIにしました",
     url: "/jobnyaha_ai",
+    bg: "/jobnyaha-overlay.jpg",
     tag: "AI",
   },
 ];
@@ -37,10 +38,22 @@ export default function Home() {
             <li key={product.name}>
               <a
                 href={product.url}
-                className="flex items-center gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors duration-150"
+                className="group relative flex items-center gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors duration-150 overflow-hidden"
               >
+                {/* bg image */}
+                {"bg" in product && product.bg && (
+                  <div
+                    className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500"
+                    style={{
+                      backgroundImage: `url('${product.bg}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  />
+                )}
+
                 {/* Text */}
-                <div className="flex-1 min-w-0">
+                <div className="relative flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{product.name}</p>
                     <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 leading-none">
