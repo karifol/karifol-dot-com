@@ -43,7 +43,7 @@ export default function Home() {
                 {/* bg image */}
                 {"bg" in product && product.bg && (
                   <div
-                    className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-500"
+                    className="absolute inset-0 opacity-20 group-hover:opacity-35 transition-opacity duration-500"
                     style={{
                       backgroundImage: `url('${product.bg}')`,
                       backgroundSize: "cover",
