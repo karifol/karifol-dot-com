@@ -6,6 +6,8 @@ import { ThemeToggle } from "../theme-toggle";
 const FT_RANGES = [
   { label: "FT60–180", hours: [60, 84, 108, 132, 156, 180] },
   { label: "FT72–192", hours: [72, 96, 120, 144, 168, 192] },
+  { label: "FT84–204", hours: [84, 108, 132, 156, 180, 204] },
+  { label: "FT96–216", hours: [96, 120, 144, 168, 192, 216] },
 ];
 const BASE = "https://weather-models.info/latest/images/ecmwf_ens_details/12Z/msm-japan-";
 
